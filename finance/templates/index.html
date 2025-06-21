@@ -1,0 +1,47 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+    {% if session["user_id"] %}
+        <h1>My Holdings</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Symbol</th>
+                    <th>Shares</th>
+                    <th>Price</th>
+                    <th>TOTAL</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for symbol in unique_symbols %}
+                    {% if share_tally[symbol.symbol] > 0 %}
+                        <tr>
+                            <td>{{ symbol.symbol }}</td>
+                            <td>{{ share_tally[symbol.symbol] }}</td>
+                            <td>{{ usd(price[symbol.symbol]) }}</td>
+                            <td>{{ usd(total_holding_value[symbol.symbol]) }}</td>
+                        </tr>
+                    {% endif %}
+                {% endfor %}
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>Cash</td>
+                    <td>{{ usd(cash[0]['cash']) }}</td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>TOTAL</td>
+                    <td>{{ usd(grand_total) }}</td>
+                </tr>
+            </tbody>
+        </table>
+    {% endif %}
+
+{% endblock %}

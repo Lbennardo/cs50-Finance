@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Symbol result
+{% endblock %}
+
+{% block main %}
+
+        <p>A share of {{ lookupResults.name }}  ({{ lookupResults.symbol }}) costs {{ usd(lookupResults.price) }}</p>
+
+{% endblock %}
